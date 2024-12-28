@@ -109,8 +109,9 @@
   .circlex svg {
     z-index: 10000;
     transform: translateZ(0);
-    stroke: #ffffff;
+    stroke: #02343a;
   }
+
   
   .overlayx {
     width: 118px;

@@ -303,8 +303,7 @@ button {
 .header_information {
      background-color: #31A834;
      padding: 0 0;
-     padding-top: 0px;
-     padding-top: 0px;
+     padding-top: 12px;
      margin-top: 0;
      margin-right: 0;
      margin-bottom: 0;
@@ -1037,7 +1036,8 @@ text-align: center;
      }
 
    .c-item {
-     height: 480px;
+     /* height: 480px; */
+     height: 100vh;
    }
    
    .c-img {
@@ -1048,6 +1048,7 @@ text-align: center;
 
    .dx-img-banner{
      width: 50%;
+     margin-top: -10rem;
 
    }
    .dx-txt-banner h1{
@@ -1087,4 +1088,11 @@ text-align: center;
 
    .dx-id-noindex:hover{
      color: #000000 !important;
+   }
+
+   .dx-txt-banner{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
    }

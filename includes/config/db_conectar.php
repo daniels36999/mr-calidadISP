@@ -15,6 +15,11 @@ function conectarDB() : mysqli {
     // $db = mysqli_connect($nombre_servidor, $usuario, $contrasena, $nombre_bd);
     $db = mysqli_connect($nombre_servidor, $usuario, $contrasena, $nombre_bd);
 
+    // Establece el conjunto de caracteres en utf8mb4
+    if (!$db->set_charset("utf8mb4")) {
+        // die("Error al configurar el conjunto de caracteres: " . $db->error);
+    }
+
     if(!$db) {
         // echo "<div style='text-align: center; margin-top: 50px;'>
         //         <h1>Error de conexión</h1>

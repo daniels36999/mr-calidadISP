@@ -20,6 +20,38 @@
         // echo "Jitter: " . $usuario['jitter'] . "<br>";
         // echo "Latencia: " . $usuario['latencia'] . "<br>";
         // echo "Disponibilidad: " . $usuario['disponibilidad'] . "<br>";
+
+        // Funciones para determinar el rango de calidad
+        function evaluarJitter($jitter) {
+            if ($jitter <= 10) return 'Excelente';
+            if ($jitter > 10 && $jitter <= 30) return 'Aceptable';
+            return 'Deficiente';
+        }
+
+        function evaluarVelocidad($velocidad_medida, $velocidad_paquete) {
+            $porcentaje = ($velocidad_medida / $velocidad_paquete) * 100;
+            if ($porcentaje >= 95) return 'Excelente';
+            if ($porcentaje >= 80 && $porcentaje < 95) return 'Aceptable';
+            return 'Deficiente';
+        }
+
+        function evaluarLatencia($latencia) {
+            if ($latencia <= 30) return 'Excelente';
+            if ($latencia > 30 && $latencia <= 100) return 'Aceptable';
+            return 'Deficiente';
+        }
+
+        function evaluarDisponibilidad($disponibilidad) {
+            if ($disponibilidad >= 96.7) return 'Excelente';
+            if ($disponibilidad >= 80 && $disponibilidad < 96.7) return 'Aceptable';
+            return 'Deficiente';
+        }
+
+        // Evaluar métricas
+        $jitter_resultado = evaluarJitter($usuario['jitter']);
+        $velocidad_resultado = evaluarVelocidad($usuario['velocidad_medida'], $usuario['velocidad_paquete']);
+        $latencia_resultado = evaluarLatencia($usuario['latencia']);
+        $disponibilidad_resultado = evaluarDisponibilidad($usuario['disponibilidad']);
         
     } else {
         // echo "No se encontraron datos del usuario. Asegúrate de haber iniciado sesión correctamente.";
@@ -109,7 +141,7 @@
                                     <a class="nav-link dx-id-noindex" href="nosotros.php">Nosotros</a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link dx-id-noindex" href="contacto.php">Contactanos</a>
+                                    <a class="nav-link dx-id-noindex" href="contacto.php">Contacto</a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link dx-id-index" href="consulta.php">Consultas</a>
@@ -162,8 +194,23 @@
                 <h2>DETALLES &#x1F50D;</h2>
                 <span></span>
              </div>
-            <div class="dx-informacion">
-                <p>Estimado/a <span><?php echo $usuario['nombre']; ?></span>, usted ha contratado el plan de <span>$<?php echo $usuario['paquete']; ?></span> dolares que ofrece una velocidad de <span><?php echo $usuario['velocidad_paquete']; ?> Mbps</span>. Durante la evaluación de su servicio, se registró una velocidad de conexión de <span><?php echo $usuario['velocidad_medida']; ?> Mbps</span>, clasificada como excelente. Además, se detectó un jitter de <span><?php echo $usuario['jitter']; ?> ms</span> y una latencia de <span><?php echo $usuario['latencia']; ?> ms</span>, ambos considerados excelentes. Finalmente, su servicio presenta una disponibilidad aceptable del <span><?php echo $usuario['disponibilidad']; ?>%</span>.</p>
+             <div class="dx-informacion">
+                <p>
+                    Estimado/a <span><?php echo $usuario['nombre']; ?></span>, usted ha contratado el plan de <span>$<?php echo $usuario['paquete']; ?></span> dólares, que ofrece una velocidad de <span><?php echo $usuario['velocidad_paquete']; ?> Mbps</span>. Durante la evaluación de su servicio, se registró una velocidad de conexión de <span><?php echo $usuario['velocidad_medida']; ?> Mbps</span>, la cual ha sido clasificada como 
+                    <strong style="color: <?php echo ($velocidad_resultado == 'Excelente') ? '#2d8703' : ($velocidad_resultado == 'Aceptable' ? '#ffd900' : '#e74c3c'); ?>;"><?php echo $velocidad_resultado; ?></strong>.
+                </p>
+
+                <ul style="padding-left: 10%;">
+                    <li style="text-align: left;">
+                        &#10134; En cuanto al <strong>jitter</strong>, se detectó un valor de <strong><?php echo $usuario['jitter']; ?> ms</strong>, lo cual se considera <?php echo ($usuario['jitter'] <= 10) ? '<strong style="color: #2d8703;">Excelente</strong>' : ($usuario['jitter'] <= 30 ? '<strong style="color: #ffd900;">Aceptable</strong>' : '<strong style="color: #e74c3c;">Deficiente</strong>'); ?>.
+                    </li>
+                    <li style="text-align: left;">
+                        &#10134; Respecto a la <strong>latencia</strong>, se registró un valor de <strong><?php echo $usuario['latencia']; ?> ms</strong>, considerado <?php echo ($usuario['latencia'] <= 30) ? '<strong style="color: #2d8703;">Excelente</strong>' : ($usuario['latencia'] <= 100 ? '<strong style="color: #ffd900;">Aceptable</strong>' : '<strong style="color: #e74c3c;">Deficiente</strong>'); ?>.
+                    </li>
+                    <li style="text-align: left;">
+                        &#10134; Finalmente, su <strong>disponibilidad</strong> es del <strong><?php echo $usuario['disponibilidad']; ?>%</strong>, lo cual es considerado <?php echo ($usuario['disponibilidad'] >= 96.7) ? '<strong style="color: #2d8703;">Excelente</strong>' : ($usuario['disponibilidad'] >= 80 ? '<strong style="color: #ffd900;">Aceptable</strong>' : '<strong style="color: #e74c3c;">Deficiente</strong>'); ?>.
+                    </li>
+                </ul>
             </div>
             <div class="dx-tarjeta">
                 <div class="bodyx"><!-- INDICADORE VELOCIDAD 1111111111111111-->
@@ -399,7 +446,7 @@
                                  <div class="link-animated d-flex flex-column justify-content-start">
                                        <a class="text-light mb-2" href="index.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Inicio</a>
                                        <a class="text-light mb-2" href="nosotros.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Nosotros</a>
-                                       <a class="text-light mb-2" href="contacto.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Contactanos</a>
+                                       <a class="text-light mb-2" href="contacto.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Contacto</a>
                                        <a class="text-light mb-2" href="consulta.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Consultas</a>
                                  </div>
                               </div>

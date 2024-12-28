@@ -79,7 +79,7 @@
                                     <a class="nav-link dx-id-index" href="nosotros.php">Nosotros</a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link dx-id-noindex" href="contacto.php">Contactanos</a>
+                                    <a class="nav-link dx-id-noindex" href="contacto.php">Contacto</a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link dx-id-noindex" href="consulta.php">Consultas</a>
@@ -164,7 +164,7 @@
                                  <div class="link-animated d-flex flex-column justify-content-start">
                                        <a class="text-light mb-2" href="index.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Inicio</a>
                                        <a class="text-light mb-2" href="nosotros.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Nosotros</a>
-                                       <a class="text-light mb-2" href="contacto.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Contactanos</a>
+                                       <a class="text-light mb-2" href="contacto.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Contacto</a>
                                        <a class="text-light mb-2" href="consulta.php"><i class="bi bi-arrow-right me-2" style="color: #00ff55;"></i>Consultas</a>
                                  </div>
                               </div>
