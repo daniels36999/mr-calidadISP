@@ -1,0 +1,23 @@
+source: "TU LINK DE PROYECTO"
+
+features:
+  - mysql
+  - php 7.4
+nginx:
+  root: public_html
+  locations:
+  - match: /
+    try_files: $uri $uri/ $uri.php
+  autoindex: on
+  fastcgi: "on"
+commands:
+  - echo "<?php phpinfo(15);" > phpinfo.php
+  - echo "display_errors = On" > .user.ini
+  - echo "display_startup_errors = On" >> .user.ini
+  - 'echo "DB_HOST=localhost" > includes/.env'
+  - 'echo "DB_USER=${USERNAME}" >> includes/.env'
+  - 'echo "DB_PASS=${PASSWORD}" >> includes/.env'
+  - 'echo "DB_NAME=${DATABASE}" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "SERVER_HOST=https://${DOMAIN}" >> includes/.env'
+  - 'composer install'
