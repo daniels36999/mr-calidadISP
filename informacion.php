@@ -1,4 +1,5 @@
 <?php
+    header('Content-Type: text/html; charset=UTF-8');
     session_start(); // Iniciar la sesión para acceder a los datos guardados
     // Verificar si el usuario está autenticado
     if(!isset($_SESSION['usuario'])) {
